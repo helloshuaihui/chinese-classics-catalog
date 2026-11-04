@@ -149,14 +149,14 @@ def main():
         "books": rows,
     }
     jpath = os.path.join(OUT, "data", "books.json")
-    with open(jpath, "w", encoding="utf-8") as f:
+    with open(jpath, "w", encoding="utf-8", newline="\n") as f:
         json.dump(payload, f, ensure_ascii=False, indent=1)
         f.write("\n")
     print(f"写出 {jpath}  {os.path.getsize(jpath) / 1048576:.1f} MB")
 
     cpath = os.path.join(OUT, "data", "books.csv")
     with open(cpath, "w", encoding="utf-8", newline="") as f:
-        w = csv.writer(f)
+        w = csv.writer(f, lineterminator="\n")
         w.writerow(["title", "author", "dynasty", "category", "chapters"])
         for r in rows:
             w.writerow([r["title"], r["author"], r["dynasty"], r["category"], r["chapters"]])
